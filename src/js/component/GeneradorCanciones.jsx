@@ -1,8 +1,15 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import CancionesCard from "./CancionesCard.jsx";
 
 const estiloDiv = {
-    width: "400px"
+    width: "100%",
+    backgroundColor: "black",
+    color: "yellow"
+}
+
+const estiloCanciones = {
+    background: "black",
+    color: "yellow"
 }
 
 
@@ -10,18 +17,18 @@ const estiloDiv = {
 const GeneradorCanciones = (props) => {
 
     return (
-        <div className="list-group" style={estiloDiv}>
+        <div className="list-group " style={estiloDiv}>
             {
                 props.audios.length > 0 &&
                 props.audios.map((audio) => (
-                    <div className='col' key={audio.id}>
-                        <CancionesCard src={audio.src} alt={`Image ${audio.id}`} setAudioSelected={props.setAudioSelected} name={audio.name} />
+                    <div className="col-12 bg-dark text-white" key={audio.url}>
+                        <CancionesCard src={audio.url} alt={`Image ${audio.id}`} setAudioSelected={props.setAudioSelected} name={audio.name} />
                     </div>
                 ))
             }
         </div>
     )
 }
+ 
 
-
-export default GeneradorCanciones 
+export default GeneradorCanciones;

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 
 //include images into your bundle
 import GeneradorCanciones from "./GeneradorCanciones.jsx";
@@ -6,21 +6,39 @@ import Reproductor from "./Reproductor.jsx";
 
 //create your first component
 
-const initialState = [
-    { id: 1, src: "https://assets.breatheco.de/apis/sound/files/mario/songs/castle.mp3", name: "Mario's castle theme.mp3"},
-    { id: 2, src: "https://assets.breatheco.de/apis/sound/files/mario/songs/hurry-starman.mp3", name: "Mario's Hurry-Starman theme.mp3" },
-    { id: 3, src: "https://assets.breatheco.de/apis/sound/files/mario/songs/overworld.mp3", name: "Mario's Overworld theme.mp3" },
-]
 
 const Home = () => {
 
 	
-	const [audios] = useState(initialState);
+	const [audios, setAudios] = useState("");
 	let audioRef = useRef(null);
 	const setAudioSelected = ({ src }) => {
         audioRef.current.src = src;
-		correr= play()
+        console.log(audioRef.current)
 	}
+
+	useEffect(() => {
+        getAudios();
+    }, [])
+
+	const getAudios =  () => {
+        fetch('https://assets.breatheco.de/apis/sound/songs', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response) => {
+                if (response.status === 404) throw new Error('Pagina no encontrada');
+                return response.json();
+            })
+            .then((data) => {
+                setAudios(data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
 
 	return (
 		<>

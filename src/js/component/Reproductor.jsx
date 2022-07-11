@@ -1,33 +1,40 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
+import {FaArrowRight, FaArrowLeft, FaPlay, FaPause} from 'react-icons/fa';
+
 
 
 const estiloBotonesDiv = {
-    height: "1000px",
-    width: "400px",
     alignItems: "flex-end",
-    marginLeft: "20px"
+    marginLeft: "20px",
+    marginTop: "10px",
+    marginBottom: "10px"
 }
 
 const estiloBotones = {
     marginLeft: "10px",
-    marginRight: "10px"
+    marginRight: "10px",
+    height: "43px"
+}
+
+const estiloAudio = {
+    margin: "10px"
 }
 
 const Reproductor = (props) => {
-
-
-
-
     return (
-        <div className="botones" style={estiloBotonesDiv}>
-            <button className="anterior" style={estiloBotones}>Anterior</button>
-            <button className="play" onClick={() => props.setAudioSelected.correr} style={estiloBotones}>Play</button>
-            <button className="pausa" style={estiloBotones}>Pausa</button>
-            <button className="siguiente" style={estiloBotones}>Siguiente</button>
-            <audio ref={props.audioRef} controls autoPlay ></audio>
+        <div className="col-4" style={estiloBotonesDiv}>
+            <div className="contenedor">
+                <button className="anterior" style={estiloBotones}><FaArrowLeft /></button>
+                <button className="play" style={estiloBotones}><FaPlay /></button>
+                <button className="pausa" onClick={() => props.setAudioSelected} style={estiloBotones}><FaPause /></button>
+                <button className="siguiente" style={estiloBotones}><FaArrowRight /></button>
+            </div>
+            <div className="contenedor">
+                <audio ref={props.audioRef} controls autoPlay style={estiloAudio} ></audio>
+            </div>
         </div>
     )
 }
 
 
-export default Reproductor 
+export default Reproductor;
