@@ -25,12 +25,12 @@ const Reproductor = (props) => {
         <div className="col-4" style={estiloBotonesDiv}>
             <div className="contenedor">
                 <button className="anterior" style={estiloBotones}><FaArrowLeft /></button>
-                <button className="play" style={estiloBotones}><FaPlay /></button>
-                <button className="pausa" onClick={() => props.setAudioSelected} style={estiloBotones}><FaPause /></button>
-                <button className="siguiente" style={estiloBotones}><FaArrowRight /></button>
+                <button className="play" title='play' onClick={() => props.play()} style={estiloBotones}><FaPlay /></button>
+                <button className="pausa" title='pause' onClick={() => props.pausa()} style={estiloBotones}><FaPause /></button>
+                <button className="siguiente" onClick={() => props.siguiente} style={estiloBotones}><FaArrowRight /></button>
             </div>
             <div className="contenedor">
-                <audio ref={props.audioRef} controls autoPlay style={estiloAudio} ></audio>
+                <audio ref={props.audioRef} autoPlay style={estiloAudio} ></audio>
             </div>
         </div>
     )

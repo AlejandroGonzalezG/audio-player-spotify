@@ -10,4 +10,4 @@ const CancionesCard = ({ alt = 'Audio', setAudioSelected, name, src }) => {
     )
 }
 
-export default CancionesCard;
+export default CancionesCard; 

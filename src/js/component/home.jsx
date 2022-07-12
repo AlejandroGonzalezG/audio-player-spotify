@@ -5,7 +5,7 @@ import GeneradorCanciones from "./GeneradorCanciones.jsx";
 import Reproductor from "./Reproductor.jsx";
 
 //create your first component
-
+ 
 
 const Home = () => {
 
@@ -14,8 +14,19 @@ const Home = () => {
 	let audioRef = useRef(null);
 	const setAudioSelected = ({ src }) => {
         audioRef.current.src = src;
-        console.log(audioRef.current)
 	}
+
+    const pausa = () => {
+        audioRef.current.pause();
+    }
+
+    const play = () => {
+        audioRef.current.play();
+    }
+
+    const siguiente = () => {
+        audioRef.current.src = audioRef.current.src[alt+1];
+    }
 
 	useEffect(() => {
         getAudios();
@@ -43,7 +54,7 @@ const Home = () => {
 	return (
 		<>
 		<GeneradorCanciones audios={audios} setAudioSelected={setAudioSelected} />
-		<Reproductor audioRef={audioRef} setAudioSelected={setAudioSelected} />
+		<Reproductor audioRef={audioRef} setAudioSelected={setAudioSelected} pausa={pausa} play={play} siguiente={siguiente} />
 		</>
 	);
 };
