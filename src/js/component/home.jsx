@@ -9,11 +9,12 @@ import Reproductor from "./Reproductor.jsx";
 
 const Home = () => {
 
-	
+	 
 	const [audios, setAudios] = useState("");
 	let audioRef = useRef(null);
-	const setAudioSelected = ({ src }) => {
+	const setAudioSelected = ({ src, name }) => {
         audioRef.current.src = src;
+        audioRef.current.name = name;
 	}
 
     const pausa = () => {
@@ -24,8 +25,16 @@ const Home = () => {
         audioRef.current.play();
     }
 
-    const siguiente = () => {
-        audioRef.current.src = audioRef.current.src[alt+1];
+    const siguiente = (name) => {
+        let current = audios.findIndex((element) => element.name == name)
+        setAudioSelected({src :`https://assets.breatheco.de/apis/sound/${audios[current+1].url}`, name : audios[current+1].name },)
+        console.log(audioRef.current.name)
+    }
+
+    const anterior = (name) => {
+        let current = audios.findIndex((element) => element.name == name)
+        setAudioSelected({src :`https://assets.breatheco.de/apis/sound/${audios[current-1].url}`, name : audios[current-1].name },)
+        console.log(audioRef.current.name)
     }
 
 	useEffect(() => {
@@ -54,7 +63,7 @@ const Home = () => {
 	return (
 		<>
 		<GeneradorCanciones audios={audios} setAudioSelected={setAudioSelected} />
-		<Reproductor audioRef={audioRef} setAudioSelected={setAudioSelected} pausa={pausa} play={play} siguiente={siguiente} />
+		<Reproductor audioRef={audioRef} setAudioSelected={setAudioSelected} pausa={pausa} play={play} siguiente={siguiente} anterior={anterior} />
 		</>
 	);
 };
